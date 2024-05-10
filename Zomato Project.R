@@ -1,4 +1,4 @@
-#first, exrat the data set the country is usa.
+#first, extract the data set the country is usa.
 zomato.11 <- read.csv("C:/Users/libo/Desktop/zomato 11.csv")
 View(zomato.11)
 usa <- subset(zomato.11, Country.Code==216)
@@ -13,7 +13,8 @@ step<-stepAIC(lm1,direction = "backward")
 step$anova
 
 
-#part 2 , we use the classification and clustering to find some result in this dataset, the first one we want to use lasso to utilize the model of  our output
+#part 2: Using classification and clustering to find some result in this dataset, 
+#Staring with lasso to utilize the model of  our output
 View(usa)
 form1<-usa
 set.seed(12345)
@@ -30,8 +31,8 @@ set.seed(1)
 row.number <- sample(x=1:nrow(usa), size=0.75*nrow(usa))
 train=usa[row.number1,]
 test=usa[-row.number1,]
-x <- model.matrix(Average.Cost.for.two~., train)[,-1]#this transforms x from a variable within a dataframe into a matrix
-y <- train$Average.Cost.for.two#this transforms y from a variable within a dataframe into a vector
+x <- model.matrix(Average.Cost.for.two~., train)[,-1] #this transforms x from a variable within a dataframe into a matrix
+y <- train$Average.Cost.for.two #this transforms y from a variable within a dataframe into a vector
 x_test <- model.matrix(Average.Cost.for.two~., test)[,-1]
 y_test <- test$Average.Cost.for.two
 #step 2
@@ -67,7 +68,7 @@ validationplot(pcr_model, val.type = c("RMSEP"))
 validationplot(pcr_model, val.type = c("MSEP"))
 validationplot(pcr_model, val.type = c("R2"))
 
-#at last 
+##The second model we use is PCR to find how many principal components should be chosen
 
 set.seed(1)
 row.number <- sample(x=1:nrow(usa3), size=0.8*nrow(usa3))
